@@ -146,7 +146,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, index, onClick }) => {
                <div className="w-20 h-20 md:w-28 md:h-28 bg-white/70 backdrop-blur shadow-lg rounded-br-sm" />
             </motion.div>
           </div>
-         )
+         );
 
       default:
         return <img src={topic.imageUrl} alt={topic.title} className="w-full h-full object-cover" />;

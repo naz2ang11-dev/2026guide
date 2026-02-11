@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import TopicCard from './TopicCard';
 import { GuideTopic } from '../types';
 
@@ -12,26 +12,29 @@ const SliderSection: React.FC<SliderSectionProps> = ({ topics, onTopicClick }) =
   const targetScrollRef = useRef<number>(0);
   const isInitializedRef = useRef(false);
 
-  // Increase to 7 sets to ensure the scrollable width is far larger than any viewport
-  // [Buffer, Buffer, Buffer, Main, Buffer, Buffer, Buffer]
-  const extendedTopics = [
+  // Use useMemo to prevent recreating this massive array on every render
+  const extendedTopics = useMemo(() => [
     ...topics, ...topics, ...topics, 
     ...topics, 
     ...topics, ...topics, ...topics
-  ];
+  ], [topics]);
 
   // Initialize scroll position to the middle (Set 4, index 3)
   useEffect(() => {
-    if (scrollContainerRef.current && !isInitializedRef.current) {
+    if (scrollContainerRef.current && !isInitializedRef.current && topics.length > 0) {
       const container = scrollContainerRef.current;
       // We have 7 sets. We want to start at the beginning of the 4th set (middle).
       const totalSets = 7;
-      const singleSetWidth = container.scrollWidth / totalSets;
-      const startPos = singleSetWidth * 3; 
       
-      container.scrollLeft = startPos;
-      targetScrollRef.current = startPos;
-      isInitializedRef.current = true;
+      // Ensure we have width to calculate
+      if (container.scrollWidth > 0) {
+        const singleSetWidth = container.scrollWidth / totalSets;
+        const startPos = singleSetWidth * 3; 
+        
+        container.scrollLeft = startPos;
+        targetScrollRef.current = startPos;
+        isInitializedRef.current = true;
+      }
     }
   }, [topics]);
 
@@ -42,36 +45,40 @@ const SliderSection: React.FC<SliderSectionProps> = ({ topics, onTopicClick }) =
     const updateScroll = () => {
       if (scrollContainerRef.current) {
         const container = scrollContainerRef.current;
-        const currentScroll = container.scrollLeft;
-        const targetScroll = targetScrollRef.current;
         
-        // Linear Interpolation (Lerp)
-        const diff = targetScroll - currentScroll;
-        
-        if (Math.abs(diff) > 0.5) {
-          container.scrollLeft = currentScroll + diff * 0.08;
-        }
+        // Safety check: if width is 0, skip logic to avoid errors or infinite loops
+        if (container.scrollWidth > 0) {
+            const currentScroll = container.scrollLeft;
+            const targetScroll = targetScrollRef.current;
+            
+            // Linear Interpolation (Lerp)
+            const diff = targetScroll - currentScroll;
+            
+            if (Math.abs(diff) > 0.5) {
+              container.scrollLeft = currentScroll + diff * 0.08;
+            }
 
-        // Infinite Scroll "Teleport" Logic
-        const maxScroll = container.scrollWidth;
-        const totalSets = 7;
-        const singleSetWidth = maxScroll / totalSets;
+            // Infinite Scroll "Teleport" Logic
+            const maxScroll = container.scrollWidth;
+            const totalSets = 7;
+            const singleSetWidth = maxScroll / totalSets;
 
-        // Middle zone is Set 4 (index 3). Range: [3*W, 4*W]
-        // If we drift too far left (into Set 3), jump forward.
-        // If we drift too far right (into Set 5), jump backward.
-        
-        // Threshold: If we are less than 2.5 sets in, add 1 set width
-        if (container.scrollLeft < singleSetWidth * 2.5) {
-          const offset = singleSetWidth;
-          container.scrollLeft += offset;
-          targetScrollRef.current += offset;
-        } 
-        // Threshold: If we are more than 4.5 sets in, subtract 1 set width
-        else if (container.scrollLeft > singleSetWidth * 4.5) {
-          const offset = singleSetWidth;
-          container.scrollLeft -= offset;
-          targetScrollRef.current -= offset;
+            // Middle zone is Set 4 (index 3). Range: [3*W, 4*W]
+            // If we drift too far left (into Set 3), jump forward.
+            // If we drift too far right (into Set 5), jump backward.
+            
+            // Threshold: If we are less than 2.5 sets in, add 1 set width
+            if (container.scrollLeft < singleSetWidth * 2.5) {
+              const offset = singleSetWidth;
+              container.scrollLeft += offset;
+              targetScrollRef.current += offset;
+            } 
+            // Threshold: If we are more than 4.5 sets in, subtract 1 set width
+            else if (container.scrollLeft > singleSetWidth * 4.5) {
+              const offset = singleSetWidth;
+              container.scrollLeft -= offset;
+              targetScrollRef.current -= offset;
+            }
         }
       }
       animationFrameId = requestAnimationFrame(updateScroll);
@@ -79,7 +86,7 @@ const SliderSection: React.FC<SliderSectionProps> = ({ topics, onTopicClick }) =
 
     updateScroll();
     return () => cancelAnimationFrame(animationFrameId);
-  }, []);
+  }, [extendedTopics.length]); // Re-run if topics change
 
   // Handle Wheel Event
   useEffect(() => {
