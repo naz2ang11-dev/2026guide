@@ -6,13 +6,15 @@
     <title>5학년 새학기 가이드</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- Babel for transforming TSX in browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
-              serif: ['Pretendard', 'sans-serif'], /* Force sans-serif even if serif class is used */
+              serif: ['Pretendard', 'sans-serif'],
             },
             colors: {
               primary: '#1a1a1a',
@@ -32,7 +34,6 @@
         background-color: #fcfbf9;
         color: #1a1a1a;
       }
-      /* Custom Scrollbar for sleek look */
       ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
@@ -55,20 +56,23 @@
         scrollbar-width: none;
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "framer-motion": "https://esm.sh/framer-motion@11.0.3",
-    "react/": "https://esm.sh/react@18.3.1/",
-    "react": "https://esm.sh/react@18.3.1",
-    "react-dom/": "https://esm.sh/react-dom@18.3.1/",
-    "react-dom": "https://esm.sh/react-dom@18.3.1",
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0"
-  }
-}
-</script>
-</head>
+    <script type="importmap">
+    {
+      "imports": {
+        "framer-motion": "https://esm.sh/framer-motion@11.0.3",
+        "react/": "https://esm.sh/react@18.3.1/",
+        "react": "https://esm.sh/react@18.3.1",
+        "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+        "react-dom/": "https://esm.sh/react-dom@18.3.1/",
+        "react-dom": "https://esm.sh/react-dom@18.3.1",
+        "lucide-react": "https://esm.sh/lucide-react@0.344.0"
+      }
+    }
+    </script>
+  </head>
   <body>
     <div id="root"></div>
+    <!-- Changed to text/babel and added .tsx extension explicitly for local import logic -->
+    <script type="text/babel" data-type="module" src="./index.tsx"></script>
   </body>
 </html>

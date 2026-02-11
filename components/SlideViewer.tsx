@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Download, Home } from 'lucide-react';
-import { GuideTopic } from '../types';
+import { GuideTopic } from '../types.ts';
 
 interface SlideViewerProps {
   topic: GuideTopic | null;

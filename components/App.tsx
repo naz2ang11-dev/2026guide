@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Hero from './components/Hero.tsx';
-import SliderSection from './components/SliderSection.tsx';
-import SlideViewer from './components/SlideViewer.tsx';
-import AllSlidesViewer from './components/AllSlidesViewer.tsx';
-import { GUIDE_TOPICS } from './constants.ts';
-import { GuideTopic } from './types.ts';
+import Hero from './components/Hero';
+import SliderSection from './components/SliderSection';
+import SlideViewer from './components/SlideViewer';
+import AllSlidesViewer from './components/AllSlidesViewer';
+import { GUIDE_TOPICS } from './constants';
+import { GuideTopic } from './types';
 import { Layers } from 'lucide-react';
 
 const App: React.FC = () => {

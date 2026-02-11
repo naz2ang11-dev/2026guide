@@ -1,4 +1,4 @@
-import { GuideTopic } from './types';
+import { GuideTopic } from './types.ts';
 
 // Updated with bold colors inspired by the reference images
 // The image URLs are now less critical as we use custom SVG art, 
@@ -11,7 +11,7 @@ export const GUIDE_TOPICS: GuideTopic[] = [
     subtitle: '스마트한 학급 관리',
     description: '주간학습안내, 행사 일정, 업무 분장을 한눈에 정리하는 노션 기초 사용법입니다.',
     imageUrl: '',
-    slideUrl: 'https://docs.google.com/presentation/d/e/2PACX-1vR6y20y3j3y2931213123/embed',
+    slideUrl: 'https://docs.google.com/presentation/d/1vpcIRcbVcCwWxF4NC_BBYW_iK2mqslZlq-bWHoJT_2Y/embed?start=false&loop=false&delayms=3000',
     downloadUrl: '#',
     tag: '업무 효율',
     themeColor: '#FFFFFF', // White/Grey
