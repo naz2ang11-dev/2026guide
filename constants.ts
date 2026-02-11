@@ -1,4 +1,4 @@
-import { GuideTopic } from './types.ts';
+import { GuideTopic } from './types';
 
 // Updated with bold colors inspired by the reference images
 // The image URLs are now less critical as we use custom SVG art, 

@@ -6,8 +6,6 @@
     <title>5학년 새학기 가이드</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <!-- Babel for transforming TSX in browser -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -72,7 +70,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- Changed to text/babel and added .tsx extension explicitly for local import logic -->
-    <script type="text/babel" data-type="module" src="./index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>

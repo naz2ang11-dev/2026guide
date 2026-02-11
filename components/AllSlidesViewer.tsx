@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Download, Home } from 'lucide-react';
-import { GuideTopic } from '../types.ts';
+import { GuideTopic } from '../types';
 
 interface AllSlidesViewerProps {
   topics: GuideTopic[];

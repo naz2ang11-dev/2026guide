@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useMemo } from 'react';
-import TopicCard from './TopicCard.tsx';
-import { GuideTopic } from '../types.ts';
+import TopicCard from './TopicCard';
+import { GuideTopic } from '../types';
 
 interface SliderSectionProps {
   topics: GuideTopic[];
