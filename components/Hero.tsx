@@ -23,8 +23,8 @@ const Hero: React.FC = () => {
         </h1>
         
         <p className="text-lg text-secondary font-light max-w-3xl leading-relaxed break-keep">
-          동학년 협업을 위한 구글 드라이브부터, 학급 운영의 핵심인 노션, 
-          복잡한 보결 규정, 그리고 AI 활용 수업까지. 
+          동학년 협업을 위한 구글 드라이브부터, 학년 운영의 핵심인 노션, 
+          사정이 있으면 편히 쉴수 있게  준비한 시스템. 
           성공적인 1년을 위한 핵심 가이드를 확인하세요.
         </p>
       </motion.div>

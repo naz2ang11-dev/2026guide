@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Cog, CheckCircle, BookOpen } from 'lucide-react';
 import { GuideTopic } from '../types';
 
 interface TopicCardProps {
@@ -20,6 +20,8 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, index, onClick }) => {
       case 'notion':      // Dark Background
       case 'mteacher':    // Dark Background
       case 'desktop':     // Medium-Dark Background
+      case 'facility':    // Dark Background
+      case 'manual':      // Orange Background
         return "text-white/30";
       default:
         return "text-white/30";
@@ -29,6 +31,48 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, index, onClick }) => {
   // Function to render custom art based on topic ID
   const renderTopicArt = () => {
     switch (topic.id) {
+      case 'manual': // User Manual - Book/Document
+        return (
+          <div className="w-full h-full bg-[#FB923C] relative flex items-center justify-center overflow-hidden">
+              {/* Pattern */}
+              <div className="absolute inset-0 opacity-10" 
+                  style={{ 
+                    backgroundImage: 'radial-gradient(#FFF 2px, transparent 2px)',
+                    backgroundSize: '24px 24px'
+                  }} 
+              />
+              
+              <motion.div 
+                className="relative w-32 h-44 md:w-44 md:h-60 bg-white rounded-r-lg rounded-l-sm shadow-2xl flex flex-col items-center justify-center border-l-8 border-orange-700"
+                whileHover={{ rotateY: -15, x: 5 }}
+                style={{ perspective: 1000 }}
+              >
+                {/* Manual Content Mockup */}
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-100 mb-4 flex items-center justify-center overflow-hidden border-2 border-gray-200">
+                   {/* Abstract User Icon */}
+                   <div className="flex flex-col items-center translate-y-2">
+                      <div className="w-6 h-6 md:w-8 md:h-8 bg-gray-300 rounded-full mb-1" /> 
+                      <div className="w-12 h-8 md:w-16 md:h-10 bg-gray-300 rounded-t-full" />
+                   </div>
+                </div>
+                <div className="w-20 md:w-24 h-2 bg-gray-200 rounded mb-2" />
+                <div className="w-12 md:w-16 h-2 bg-gray-200 rounded" />
+
+                {/* Label */}
+                <div className="absolute bottom-4 text-[0.6rem] font-bold tracking-widest uppercase text-gray-400">MANUAL</div>
+                
+                {/* Floating Element */}
+                <motion.div 
+                  className="absolute -top-3 -right-3 bg-white p-2 rounded-full shadow-md text-orange-500"
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                >
+                   <BookOpen className="w-4 h-4 md:w-5 md:h-5" />
+                </motion.div>
+              </motion.div>
+          </div>
+        );
+
       case 'drive': // Google Drive - Abstract Triangle
         return (
           <div className="w-full h-full bg-[#FAFAFA] relative flex items-center justify-center overflow-hidden">
@@ -100,7 +144,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, index, onClick }) => {
           </div>
         );
 
-      case 'mteacher': // AI - Tablet/Chip
+      case 'mteacher': // AI - Tablet
         return (
           <div className="w-full h-full bg-slate-900 relative flex items-center justify-center overflow-hidden">
              {/* Tech Grid Background */}
@@ -111,20 +155,46 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, index, onClick }) => {
                   }} 
              />
 
-             {/* Glowing Core */}
+             {/* Tablet Device */}
              <motion.div 
-               className="relative w-48 h-32 md:w-64 md:h-44 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-[0_0_50px_rgba(59,130,246,0.5)] border border-blue-400/50 flex items-center justify-center"
+               className="relative w-48 h-32 md:w-64 md:h-44 bg-gray-800 rounded-xl shadow-2xl border-4 border-gray-700 flex items-center justify-center"
                whileHover={{ scale: 1.05 }}
              >
-                {/* Screen Glint */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent rounded-xl" />
-                {/* AI Node */}
-                <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-inner">
-                   <div className="w-8 h-8 rounded-full bg-blue-500 animate-pulse" />
+                {/* Screen Area */}
+                <div className="w-full h-full bg-slate-900 rounded-lg relative overflow-hidden flex flex-col p-3">
+                   {/* Top Bar */}
+                   <div className="flex justify-between items-center mb-4 opacity-50">
+                      <div className="w-10 h-1 bg-white/20 rounded-full"></div>
+                      <div className="flex gap-1">
+                        <div className="w-1 h-1 bg-white/40 rounded-full"></div>
+                        <div className="w-1 h-1 bg-white/40 rounded-full"></div>
+                      </div>
+                   </div>
+
+                   {/* Content Mockup */}
+                   <div className="flex-1 flex flex-col items-center justify-center gap-3">
+                      {/* AI Circle */}
+                      <div className="w-12 h-12 rounded-full border border-blue-500/50 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.3)] bg-blue-500/10">
+                        <span className="text-blue-400 font-bold text-[0.6rem]">AI</span>
+                      </div>
+                      {/* Lines */}
+                      <div className="w-full space-y-1.5 px-4 opacity-30">
+                        <div className="w-full h-1 bg-blue-400 rounded-full"></div>
+                        <div className="w-3/4 h-1 bg-blue-400 rounded-full"></div>
+                        <div className="w-1/2 h-1 bg-blue-400 rounded-full"></div>
+                      </div>
+                   </div>
+
+                   {/* Scanning Effect */}
+                   <motion.div 
+                     className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/10 to-transparent pointer-events-none"
+                     animate={{ top: ['-100%', '100%'] }}
+                     transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+                   />
                 </div>
-                {/* Data Lines */}
-                <div className="absolute -left-4 top-1/2 w-8 h-1 bg-blue-400 rounded-full" />
-                <div className="absolute -right-4 top-1/2 w-8 h-1 bg-blue-400 rounded-full" />
+                
+                {/* Camera */}
+                <div className="absolute top-1/2 -left-1.5 w-1 h-8 bg-gray-600 rounded-l-md transform -translate-y-1/2"></div>
              </motion.div>
           </div>
         );
@@ -147,6 +217,53 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, index, onClick }) => {
             </motion.div>
           </div>
          );
+
+      case 'facility': // Automation - Gears & Check
+        return (
+          <div className="w-full h-full bg-[#8B5CF6] relative flex items-center justify-center overflow-hidden">
+             {/* Background Gears */}
+             <motion.div 
+               className="absolute top-[-10%] right-[-10%] opacity-10"
+               animate={{ rotate: 360 }}
+               transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+             >
+                <Cog className="w-64 h-64 text-white" />
+             </motion.div>
+
+             <motion.div 
+               className="relative w-40 h-40 md:w-56 md:h-56 bg-white rounded-full shadow-2xl flex items-center justify-center"
+               whileHover={{ scale: 1.1, rotate: -10 }}
+             >
+                {/* Face/Icon */}
+                <div className="flex flex-col items-center justify-center gap-2">
+                   <div className="flex gap-4">
+                     <div className="w-3 h-8 bg-gray-800 rounded-full animate-blink" />
+                     <div className="w-3 h-8 bg-gray-800 rounded-full animate-blink" />
+                   </div>
+                   <div className="w-16 h-8 border-b-4 border-gray-800 rounded-[50%] mt-2" />
+                </div>
+                
+                {/* Floating Gear */}
+                <motion.div 
+                  className="absolute -top-4 -right-4 bg-yellow-400 p-3 rounded-full shadow-lg"
+                  animate={{ rotate: -360 }}
+                  transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
+                >
+                   <Cog className="w-8 h-8 text-yellow-900" />
+                </motion.div>
+
+                {/* Checkmark */}
+                 <motion.div 
+                  className="absolute -bottom-2 -left-2 bg-green-500 p-2 rounded-full shadow-lg border-4 border-white"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.5, type: 'spring' }}
+                >
+                   <CheckCircle className="w-8 h-8 text-white" />
+                </motion.div>
+             </motion.div>
+          </div>
+        );
 
       default:
         return <img src={topic.imageUrl} alt={topic.title} className="w-full h-full object-cover" />;
