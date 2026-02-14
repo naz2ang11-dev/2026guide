@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Cog, CheckCircle, BookOpen } from 'lucide-react';
+import { ArrowUpRight, Cog, CheckCircle, BookOpen, ClipboardList } from 'lucide-react';
 import { GuideTopic } from '../types';
 
 interface TopicCardProps {
@@ -22,6 +22,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, index, onClick }) => {
       case 'desktop':     // Medium-Dark Background
       case 'facility':    // Dark Background
       case 'manual':      // Orange Background
+      case 'rules':       // Red Background
         return "text-white/30";
       default:
         return "text-white/30";
@@ -260,6 +261,59 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, index, onClick }) => {
                   transition={{ delay: 0.5, type: 'spring' }}
                 >
                    <CheckCircle className="w-8 h-8 text-white" />
+                </motion.div>
+             </motion.div>
+          </div>
+        );
+
+      case 'rules': // Rules - Clipboard
+        return (
+          <div className="w-full h-full bg-[#E11D48] relative flex items-center justify-center overflow-hidden">
+             {/* Background Pattern */}
+             <div className="absolute inset-0" 
+                  style={{ 
+                    backgroundImage: 'linear-gradient(45deg, #BE123C 25%, transparent 25%, transparent 75%, #BE123C 75%, #BE123C), linear-gradient(45deg, #BE123C 25%, transparent 25%, transparent 75%, #BE123C 75%, #BE123C)',
+                    backgroundSize: '20px 20px',
+                    backgroundPosition: '0 0, 10px 10px',
+                    opacity: 0.1
+                  }} 
+             />
+
+             <motion.div 
+               className="relative w-40 h-52 md:w-52 md:h-64 bg-amber-100 rounded-md shadow-2xl flex flex-col items-center pt-8"
+               whileHover={{ scale: 1.05 }}
+               style={{ transformOrigin: 'top center' }}
+               animate={{ rotate: [0, 2, 0, -2, 0] }}
+               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+             >
+                {/* Metal Clip */}
+                <div className="absolute -top-4 w-24 h-12 bg-gray-300 rounded-t-lg border-b-4 border-gray-400 shadow-md z-20 flex justify-center items-end pb-2">
+                   <div className="w-12 h-4 bg-gray-800 rounded-full" />
+                </div>
+
+                {/* Paper Content */}
+                <div className="w-[85%] h-[85%] bg-white shadow-inner flex flex-col p-4 gap-3">
+                   <div className="w-full h-4 bg-gray-200 rounded-sm mb-2" />
+                   
+                   {/* Checklist items */}
+                   {[1, 2, 3, 4].map(i => (
+                     <div key={i} className="flex items-center gap-2">
+                        <div className="w-4 h-4 border-2 border-red-500 rounded-sm flex items-center justify-center">
+                          <div className="w-2 h-2 bg-red-500 rounded-full" />
+                        </div>
+                        <div className="flex-1 h-2 bg-gray-100 rounded-full" />
+                     </div>
+                   ))}
+                </div>
+
+                {/* Floating Pencil */}
+                <motion.div 
+                  className="absolute -right-6 bottom-10 w-4 h-32 bg-yellow-400 rounded-b-md border-l-4 border-yellow-600 shadow-lg transform rotate-45 origin-bottom-left"
+                  whileHover={{ rotate: 30 }}
+                >
+                   <div className="absolute -top-4 w-full h-4 bg-pink-300 rounded-t-sm" /> {/* Eraser */}
+                   <div className="absolute bottom-0 w-full h-0 border-l-[8px] border-r-[8px] border-t-[16px] border-l-transparent border-r-transparent border-t-yellow-400 transform translate-y-full" /> {/* Tip Base */}
+                   <div className="absolute bottom-0 w-full h-0 border-l-[8px] border-r-[8px] border-t-[16px] border-l-transparent border-r-transparent border-t-black transform translate-y-full scale-50 translate-y-2" /> {/* Lead */}
                 </motion.div>
              </motion.div>
           </div>

@@ -3,7 +3,8 @@ export interface GuideTopic {
   title: string;
   subtitle: string;
   description: string;
-  imageUrl: string; // Thumbnail image
+  imageUrl: string; // Thumbnail image (fallback)
+  posterImageUrl?: string; // Optional image to display inside the viewer (side-by-side)
   slideUrl: string; // Google Slide Embed URL
   downloadUrl?: string; // Link to download the file
   tag: string;

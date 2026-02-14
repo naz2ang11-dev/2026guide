@@ -88,5 +88,21 @@ export const GUIDE_TOPICS: GuideTopic[] = [
     tag: '업무 자동화',
     themeColor: '#8B5CF6', // Violet
     textColor: '#ffffff'
+  },
+  {
+    id: 'rules',
+    title: '5학년 학생 생활규칙 안내',
+    subtitle: '생활 지도 가이드',
+    description: '아래 내용을 바탕으로 모든 학생들에게 교육해주세요. 공통된 규칙으로 5학년 질서를 바로 잡겠습니다.',
+    imageUrl: '',
+    // Use Google Drive THUMBNAIL link format which is more reliable for embedding images (avoids CORS/403 issues)
+    // ID: 1LPDPGxZ7huTA2_tGRWHXvIKAHWjTsO9C
+    posterImageUrl: 'https://drive.google.com/thumbnail?id=1LPDPGxZ7huTA2_tGRWHXvIKAHWjTsO9C&sz=w1000', 
+    slideUrl: 'https://docs.google.com/presentation/d/1q6oxLzE6JhDwoPPd1CcmKpTRIoBYh7fT1W4T3JKZ2tM/embed',
+    // Using the direct download link format for Google Drive
+    downloadUrl: 'https://drive.google.com/uc?export=download&id=1U6qw2qkduRECSxzvIP7eOs7pPVMBThxQ',
+    tag: '생활 지도',
+    themeColor: '#E11D48', // Rose Red for "Rules/Attention"
+    textColor: '#ffffff'
   }
 ];
